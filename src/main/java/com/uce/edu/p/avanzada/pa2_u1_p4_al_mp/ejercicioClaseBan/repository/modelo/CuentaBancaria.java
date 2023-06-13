@@ -10,7 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-@Table(name = "cuentaBancaria")
+@Table(name = "cuenta")
 @Entity
 public class CuentaBancaria {
     
@@ -23,11 +23,11 @@ public class CuentaBancaria {
     private String numeroCuenta;
     @Column(name = "cta.tipo")
     private String tipo;
-    @Column(name = "cta.fecha.a")
+    @Column(name = "cta.fecha")
     private LocalDate fechaApertura;
     @Column(name = "cta.saldo")
     private BigDecimal saldo;
-    @Column(name = "cta.cedula.pro")
+    @Column(name = "cta.cedula")
     private String cedulaPropientario;
 
     
