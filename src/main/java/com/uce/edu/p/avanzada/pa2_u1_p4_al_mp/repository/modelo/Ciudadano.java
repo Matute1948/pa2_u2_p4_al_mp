@@ -1,5 +1,6 @@
 package com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.repository.modelo;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,16 +15,15 @@ public class Ciudadano {
     @GeneratedValue(generator = "seq_ciudadano",strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "seq_ciudadano", sequenceName = "seq_ciudadano", allocationSize = 1) 
     @Id
-    @Column(name = "ciud.id" )
+    @Column(name = "ciud_id" )
     private Integer id;
-    @Column(name = "ciud.nombre")
+    @Column(name = "ciud_nombre")
     private String nombre;
-    @Column(name = "ciud.apellido" )
+    @Column(name = "ciud_apellido" )
     private String apellido;
-    @Column(name = "ciud.cedula" )
+    @Column(name = "ciud_cedula" )
     private String cedula;
-
-    @OneToOne(mappedBy = "ciudadano")// nombre del atributa de la tabla secuandaria
+    @OneToOne(mappedBy = "ciudadano", cascade = CascadeType.ALL) // nombre del atributa de la tabla secuandaria
     private Empleado empleado; // solo va a tener un empelado
     // si quisiera mas seria una lista o algo por el estilo
 
