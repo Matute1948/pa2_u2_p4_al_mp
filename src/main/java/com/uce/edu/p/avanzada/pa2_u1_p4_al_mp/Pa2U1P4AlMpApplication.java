@@ -1,7 +1,9 @@
 package com.uce.edu.p.avanzada.pa2_u1_p4_al_mp;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +14,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.repository.modelo.Autor;
 import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.repository.modelo.Ciudadano;
 import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.repository.modelo.Empleado;
+import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.repository.modelo.Habitacion;
+import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.repository.modelo.Hotel;
 import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.repository.modelo.Libro;
 import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.service.AutorService;
 import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.service.CiudadanoService;
 import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.service.EmpleadoService;
+import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.service.HabitacionService;
+import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.service.HotelService;
 
 
 
@@ -23,11 +29,9 @@ import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.service.EmpleadoService;
 public class Pa2U1P4AlMpApplication implements CommandLineRunner {
 
 	@Autowired
-	private AutorService autorService;
+	private HotelService hotelService;
 	@Autowired
-	private CiudadanoService ciudadanoService;
-	@Autowired
-	private EmpleadoService empleadoService;
+	private HabitacionService habitacionService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Pa2U1P4AlMpApplication.class, args);
@@ -36,26 +40,40 @@ public class Pa2U1P4AlMpApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Ciudadano ciudadano = new Ciudadano();
-		Empleado empleado = new Empleado();
-
-		ciudadano.setNombre("Andres");
-		ciudadano.setApellido("Lugmaña");
-		ciudadano.setCedula("17242106985");
-		ciudadano.setEmpleado(empleado);
-
-		empleado.setCargo("Programador");
-		empleado.setCiudadano(ciudadano);
-		empleado.setSueldo(new BigDecimal(2000));
-
-		this.ciudadanoService.agregar(ciudadano);
-		Ciudadano ciu = this.ciudadanoService.buscarPorNumero(1);
-		ciu.setNombre("Felipe");
-		this.ciudadanoService.actualizar(ciu);
+		Hotel hotel1 = new Hotel();
+		List<Habitacion> listHab = new ArrayList<>();
+		Habitacion habitacion = new Habitacion();
+		Habitacion habitacion2 = new Habitacion();
 		
-		Empleado em = this.empleadoService.buscarPorNumero(1);
-		em.setCargo("Senior");
-		this.empleadoService.actualizar(em);
+
+		habitacion.setNumero("231");
+		habitacion.setValor(new BigDecimal(300));
+		habitacion.setHotel(hotel1);
+		//------------------------------------
+		habitacion2.setHotel(hotel1);
+		habitacion2.setNumero("313");
+		habitacion2.setValor(new BigDecimal(200));
+
+		listHab.add( habitacion);
+		listHab.add( habitacion2);
+
+		hotel1.setNombre("Amanecer");
+		hotel1.setDireccion("Valle de los chillos");
+		hotel1.setHabitacion(listHab);
+
+		this.hotelService.agregar(hotel1);
+		Hotel hot = this.hotelService.buscarPorNumero(1);
+		this.hotelService.actualizar(hot);
+		
+		Habitacion hab = this.habitacionService.buscarPorNumero(1);
+		this.habitacionService.actualizar(hab);
+		this.habitacionService.eliminar(1);
+		this.habitacionService.eliminar(2);
+		this.hotelService.eliminar(1);
+		
+
+
+
 		//this.empleadoService.eliminar(1);
 		//this.ciudadanoService.eliminar(1);
 
