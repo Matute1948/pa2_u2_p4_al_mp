@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.repository.LibroRepository;
 import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.repository.modelo.Libro;
 @Service
-public class LibreServiceImpl implements LibreService{
+public class LibroServiceImpl implements LibroService{
     @Autowired
     private LibroRepository libroRepository;
 

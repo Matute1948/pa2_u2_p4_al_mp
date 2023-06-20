@@ -22,6 +22,7 @@ import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.service.CiudadanoService;
 import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.service.EmpleadoService;
 import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.service.HabitacionService;
 import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.service.HotelService;
+import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.service.LibroService;
 
 
 
@@ -29,9 +30,9 @@ import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.service.HotelService;
 public class Pa2U1P4AlMpApplication implements CommandLineRunner {
 
 	@Autowired
-	private HotelService hotelService;
+	private AutorService autorService;
 	@Autowired
-	private HabitacionService habitacionService;
+	private LibroService libroService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Pa2U1P4AlMpApplication.class, args);
@@ -40,46 +41,6 @@ public class Pa2U1P4AlMpApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Hotel hotel1 = new Hotel();
-		List<Habitacion> listHab = new ArrayList<>();
-		Habitacion habitacion = new Habitacion();
-		Habitacion habitacion2 = new Habitacion();
-		
-
-		habitacion.setNumero("231");
-		habitacion.setValor(new BigDecimal(300));
-		habitacion.setHotel(hotel1);
-		//------------------------------------
-		habitacion2.setHotel(hotel1);
-		habitacion2.setNumero("313");
-		habitacion2.setValor(new BigDecimal(200));
-
-		listHab.add( habitacion);
-		listHab.add( habitacion2);
-
-		hotel1.setNombre("Amanecer");
-		hotel1.setDireccion("Valle de los chillos");
-		hotel1.setHabitacion(listHab);
-
-		this.hotelService.agregar(hotel1);
-		Hotel hot = this.hotelService.buscarPorNumero(1);
-		this.hotelService.actualizar(hot);
-		
-		Habitacion hab = this.habitacionService.buscarPorNumero(1);
-		this.habitacionService.actualizar(hab);
-		this.habitacionService.eliminar(1);
-		this.habitacionService.eliminar(2);
-		this.hotelService.eliminar(1);
-		
-
-
-
-		//this.empleadoService.eliminar(1);
-		//this.ciudadanoService.eliminar(1);
-
-
-
-		/* 
 		Autor autor = new Autor();
 		Autor autor1 = new Autor();
 
@@ -112,9 +73,20 @@ public class Pa2U1P4AlMpApplication implements CommandLineRunner {
 		libro.setAutores(autores);
 		libro1.setAutores(autores);
 
-		this.autorService.agregar(autor);
+		this.libroService.agregar(libro);
+
+		Libro lib1 = this.libroService.buscarPorNumero(1);
+		this.libroService.actualizar(lib1);
+
+		Autor au1 = this.autorService.buscarPorNumero(1);
+		Autor au2 = this.autorService.buscarPorNumero(2);
+		this.autorService.actualizar(au1);
+		this.autorService.actualizar(au2);
+
+		this.libroService.eliminar(1);
 		
-		*/
+		
+		
 
 	}
 
