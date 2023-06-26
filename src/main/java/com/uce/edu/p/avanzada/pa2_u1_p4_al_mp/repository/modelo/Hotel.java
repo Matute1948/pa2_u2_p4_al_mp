@@ -53,13 +53,16 @@ public class Hotel {
     public void setHabitacion(List<Habitacion> habitacion) {
         this.habitacion = habitacion;
     }
-
     //toString 
-    
     @Override
     public String toString() {
-        return "Hotel [id=" + id + ", nombre=" + nombre + ", direccion=" + direccion + "]";
+        return "Hotel [id=" + id + ", nombre=" + nombre + ", direccion=" + direccion + ", habitacion=" + habitacion
+                + "]";
     }
+
+    
+    
+    
     
 
     

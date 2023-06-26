@@ -1,5 +1,7 @@
 package com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +32,32 @@ public class EstudianteServiceImpl implements EstdianteService{
     @Override
     public void actualizar(Estudiante estudiante) {
         this.estudianteRepository.actualizar(estudiante);
+    }
+
+    @Override
+    public Estudiante buscarPorApellido(String apellido) {
+        return this.estudianteRepository.seleccionarPorApellido(apellido);
+    }
+
+    @Override
+    public Estudiante buscarPorApellidoNombre(String apellido, String nombre) {
+        return this.estudianteRepository.seleccionarPorApellidoNombre(apellido,nombre);
+    }
+
+    @Override
+    public List<Estudiante> buscarPorListApellido(String apellido) {
+        
+        return this.estudianteRepository.seleccionarListaPorApellido(apellido);
+    }
+
+    public Estudiante buscarPorApellidoTyped(String apellido){
+         return this.estudianteRepository.seleccionarPorApellidoTyped(apellido);
+       
+    }
+
+    @Override
+    public List<Estudiante> buscarPorApellidoListTyped(String apellido) {
+        return this.estudianteRepository.seleccionarListPorApellidoTyped(apellido);
     }
 
     

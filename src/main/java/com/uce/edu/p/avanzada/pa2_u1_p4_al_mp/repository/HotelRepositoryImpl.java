@@ -11,7 +11,7 @@ import jakarta.transaction.Transactional;
 @Repository
 @Transactional
 public class HotelRepositoryImpl implements HotelRepository{
-     @PersistenceContext 
+    @PersistenceContext 
     private EntityManager entityManager;
 
     @Override

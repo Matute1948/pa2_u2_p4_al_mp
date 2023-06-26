@@ -1,28 +1,16 @@
 package com.uce.edu.p.avanzada.pa2_u1_p4_al_mp;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.repository.modelo.Autor;
 import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.repository.modelo.Ciudadano;
 import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.repository.modelo.Empleado;
-import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.repository.modelo.Habitacion;
-import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.repository.modelo.Hotel;
-import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.repository.modelo.Libro;
-import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.service.AutorService;
 import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.service.CiudadanoService;
-import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.service.EmpleadoService;
-import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.service.HabitacionService;
-import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.service.HotelService;
-import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.service.LibroService;
+
 
 
 
@@ -30,9 +18,7 @@ import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.service.LibroService;
 public class Pa2U1P4AlMpApplication implements CommandLineRunner {
 
 	@Autowired
-	private AutorService autorService;
-	@Autowired
-	private LibroService libroService;
+	private CiudadanoService ciudadanoService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Pa2U1P4AlMpApplication.class, args);
@@ -40,54 +26,90 @@ public class Pa2U1P4AlMpApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-
-		Autor autor = new Autor();
-		Autor autor1 = new Autor();
-
-		autor.setNombre("Andres");
-		autor.setApellido("Lugmaña");
+		/* 
+		Ciudadano ciudadano = new Ciudadano();
+		ciudadano.setCedula("756834");
+		ciudadano.setNombre("Katerine");
+		ciudadano.setApellido("Lugmaña");
 		
-		autor1.setNombre("Jhomara");
-		autor1.setApellido("Cacuango");
+		Ciudadano ciudadano1 = new Ciudadano();
+		ciudadano1.setCedula("756839");
+		ciudadano1.setNombre("Diego");
+		ciudadano1.setApellido("Rivas");
 
+		Ciudadano ciudadano2 = new Ciudadano();
+		ciudadano2.setCedula("756833");
+		ciudadano2.setNombre("Elena");
+		ciudadano2.setApellido("Rivas");
 
-		Libro libro = new Libro();
-		Libro libro1 = new Libro();
+		Ciudadano ciudadano3 = new Ciudadano();
+		ciudadano3.setCedula("756835");
+		ciudadano3.setNombre("Adrian");
+		ciudadano3.setApellido("Rivas");
 
-
-		libro.setEditorial("Castellana");
-		libro.setTitulo("El puro de fresa");
-
-		libro1.setEditorial("Ecuadroian");
-		libro1.setTitulo("Canta Canta ahhh");
-
-		Set<Autor> autores = new HashSet<>();
-		Set<Libro> libros = new HashSet<>();
-		autores.add(autor);
-		autores.add(autor1);
-		libros.add(libro1);
-		libros.add(libro);
-
-		autor.setLibro(libros);
-		autor1.setLibro(libros);
-		libro.setAutores(autores);
-		libro1.setAutores(autores);
-
-		this.libroService.agregar(libro);
-
-		Libro lib1 = this.libroService.buscarPorNumero(1);
-		this.libroService.actualizar(lib1);
-
-		Autor au1 = this.autorService.buscarPorNumero(1);
-		Autor au2 = this.autorService.buscarPorNumero(2);
-		this.autorService.actualizar(au1);
-		this.autorService.actualizar(au2);
-
-		this.libroService.eliminar(1);
+		Ciudadano ciudadano4 = new Ciudadano();
+		ciudadano4.setCedula("756836");
+		ciudadano4.setNombre("Jhomara");
+		ciudadano4.setApellido("Cacuango");
 		
-		
-		
+		Ciudadano ciudadano5 = new Ciudadano();
+		ciudadano5.setCedula("756840");
+		ciudadano5.setNombre("Andres");
+		ciudadano5.setApellido("Lugmaña");
+		Ciudadano ciudadano6 = new Ciudadano();
+		ciudadano6.setCedula("756841");
+		ciudadano6.setNombre("Ronny");
+		ciudadano6.setApellido("Achig");
+		 
+		Empleado empleado = new Empleado();
+		empleado.setCargo("Programador");
+		empleado.setSueldo(new BigDecimal(2000));
+		empleado.setCiudadano(ciudadano);
+		Empleado empleado1 = new Empleado();
+		empleado1.setCargo("Programador");
+		empleado1.setSueldo(new BigDecimal(3000));
+		empleado1.setCiudadano(ciudadano1);
+		Empleado empleado2 = new Empleado();
+		empleado2.setCargo("Programador");
+		empleado2.setSueldo(new BigDecimal(1000));
+		empleado2.setCiudadano(ciudadano2);
+		Empleado empleado3 = new Empleado();
+		empleado3.setCargo("Programador");
+		empleado3.setSueldo(new BigDecimal(4000));
+		empleado3.setCiudadano(ciudadano3);
+		Empleado empleado4 = new Empleado();
+		empleado4.setCargo("Programador");
+		empleado4.setSueldo(new BigDecimal(3000));
+		empleado4.setCiudadano(ciudadano4);
 
+		ciudadano.setEmpleado(empleado);
+		ciudadano1.setEmpleado(empleado1);
+		ciudadano2.setEmpleado(empleado2);
+		ciudadano3.setEmpleado(empleado3);
+		ciudadano4.setEmpleado(empleado4);
+
+		this.ciudadanoService.agregar(ciudadano);
+		this.ciudadanoService.agregar(ciudadano1);
+		this.ciudadanoService.agregar(ciudadano2);
+		this.ciudadanoService.agregar(ciudadano3);
+		this.ciudadanoService.agregar(ciudadano4);
+		
+		this.ciudadanoService.agregar(ciudadano6);
+		this.ciudadanoService.agregar(ciudadano5);
+		*/
+		//Query single result 
+		System.out.println("*******************************************");
+		System.out.println(this.ciudadanoService.buscarPorApellido("Achig"));
+		//Query result list
+		System.out.println("*******************************************");
+		System.out.println(this.ciudadanoService.buscarPorListApellido("Lugmaña"));
+		//TypeQuery single result
+		System.out.println("*******************************************");
+		System.out.println(this.ciudadanoService.buscarPorApellidoTyped("Cacuango"));
+		//TypeQuery result list 
+		System.out.println("*******************************************");
+		System.out.println(this.ciudadanoService.buscarPorApellidoListTyped("Rivas"));
+		System.out.println("*******************************************");
 	}
 
 }

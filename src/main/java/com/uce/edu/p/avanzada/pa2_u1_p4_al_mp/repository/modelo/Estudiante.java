@@ -19,15 +19,15 @@ public class Estudiante {
     @GeneratedValue(generator = "seq_estudiante",strategy = GenerationType.SEQUENCE)// le decimos de manera explicita q trabajamos con secuencia
     @SequenceGenerator(name = "seq_estudiante", sequenceName = "seq_estudiante", allocationSize = 1) // debe ser el mismo invremento q colocamos en posgrest
     @Id
-    @Column(name = "estu.id")
+    @Column(name = "estu_id")
     private Integer id;
-    @Column(name = "estu.cedula")
+    @Column(name = "estu_cedula")
     private String cedula;
-    @Column(name = "estu.nombre")
+    @Column(name = "estu_nombre")
     private String nombre;
-    @Column(name = "estu.apellido")
+    @Column(name = "estu_apellido")
     private String apellido;
-    @Column(name = "estu.institucion")
+    @Column(name = "estu_institucion")
     private String institucion;
     
 
@@ -52,7 +52,6 @@ public class Estudiante {
     public void setInstitucion(String institucion) {
         this.institucion = institucion;
     }
-    
     public String getCedula() {
         return cedula;
     }

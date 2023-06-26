@@ -68,10 +68,10 @@ public class Libro {
         this.autores = autores;
     }
 
-    
-    
-    
-
+    @Override
+    public String toString() {
+        return "Libro [id=" + id + ", titulo=" + titulo + ", editorial=" + editorial + ", autores=" + autores + "]";
+    }
 
 
 }
