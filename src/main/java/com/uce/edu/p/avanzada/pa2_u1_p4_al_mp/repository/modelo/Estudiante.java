@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedNativeQuery;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 //para un schema diferente de public 
@@ -12,6 +13,7 @@ import jakarta.persistence.Table;
 @Table(name = "estudiante")
 //a la clase a la que mapeo la tabla  mapeo-->entity 
 @Entity
+@NamedNativeQuery(name = "Estudiante.buscaPorApellido", query = "SELECT e FROM Estudiante e WHERE e.apellido = :datoApellido")
 public class Estudiante {
     //mapear los atributos con las columnas
     //debe contar con esto necesariamente 
