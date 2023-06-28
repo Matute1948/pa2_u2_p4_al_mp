@@ -11,6 +11,12 @@ public interface EstdianteService {
     public Estudiante buscarPorApellidoNombre(String apellido,String nombre);
     public Estudiante buscarPorApellidoTyped(String apellido);
     public List<Estudiante> buscarPorApellidoListTyped(String apellido);
+    public Estudiante buscarPorApellidoNamedQuery(String apellido);
+    public Estudiante buscarPorApellidoNamed(String apellido);
+    public Estudiante buscarPorNombreNamed(String nombre);
+    public Estudiante buscarPorApellidoNativedQuery(String apellido);
+    public Estudiante buscarPorApellidoNativedQueryNamed(String apellido);
+    public Estudiante buscarPorNombreNativedQueryNamed(String nombre);
     public void agregar(Estudiante estudiante);
     public Estudiante buscarPorNumero(String cedula);
     public void eliminar(String cedula);

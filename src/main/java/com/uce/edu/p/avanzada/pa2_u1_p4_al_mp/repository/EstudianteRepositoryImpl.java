@@ -3,6 +3,7 @@ package com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.repository;
 
 import java.util.List;
 
+import org.hibernate.annotations.DialectOverride.Where;
 import org.springframework.stereotype.Repository;
 
 import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.repository.modelo.Estudiante;
@@ -11,6 +12,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 
 @Repository // anotacion adicional
@@ -85,10 +90,68 @@ public class EstudianteRepositoryImpl implements EstudianteRepository{
     }
     @Override
     public Estudiante seleccionarPorApellidoNamed(String apellido) {
-        TypedQuery<Estudiante> mQuery = this.entityManager.createNamedQuery("Estudiante.buscaPorApellido", Estudiante.class);
+        TypedQuery<Estudiante> mQuery = this.entityManager.createNamedQuery("Estudiante.buscarPorApellido", Estudiante.class);
         mQuery.setParameter("datoApellido", apellido);
         return mQuery.getSingleResult();
     }
+    @Override
+    public Estudiante seleccionarPorApellidoNamedQuery(String apellido) {
+
+        Query mQuery = this.entityManager.createNamedQuery("Estudiante.buscarPorApellido",Estudiante.class);
+        mQuery.setParameter("datoApellido", apellido);
+        return (Estudiante) mQuery.getSingleResult();
+
+    }
+    @Override
+    public Estudiante seleccionarPorApellidoNativeQuery(String apellido) {
+        // siempre hacer el cast 
+        //crea native query como typed query
+        Query query=this.entityManager.createNativeQuery("SELECT * FROM estudiante WHERE estu_apellido = :datoApellido", Estudiante.class);
+        query.setParameter("datoApellido", apellido);
+        return (Estudiante)query.getSingleResult();
+    }
+    @Override
+    public Estudiante seleccionarPorApellidoNativeQueryNamed(String apellido) {
+        TypedQuery<Estudiante> query = this.entityManager.createNamedQuery("Estudiante.buscarPorApellidoNative", Estudiante.class);
+        query.setParameter("datoApellido",apellido);
+        return query.getSingleResult();
+    }
+    @Override
+    public Estudiante seleccionarPorNombreNamed(String nombre) {
+        TypedQuery<Estudiante> mQuery = this.entityManager.createNamedQuery("Estudiante.buscarPorNombre", Estudiante.class);
+        mQuery.setParameter("datoNombre", nombre);
+        return mQuery.getSingleResult();
+    }
+    @Override
+    public Estudiante seleccionarPorNombreNativeQueryNamed(String nombre) {
+        TypedQuery<Estudiante> query = this.entityManager.createNamedQuery("Estudiante.buscarPorNombreNative", Estudiante.class);
+        query.setParameter("datoNombre", nombre);
+        return query.getSingleResult();
+    }
+    @Override
+    public Estudiante seleccionarPorApellidoCriteriaApiQuery(String apellido) {
+        CriteriaBuilder myBuilder = this.entityManager.getCriteriaBuilder();
+        //vamos a especificar el tipo de retorno que tiene mi query (Estudiante)
+        CriteriaQuery<Estudiante> mCriteriaQuery = myBuilder.createQuery(Estudiante.class);
+        //empezar a crear el sql 
+        //definimos el From (Root en criteria api query)
+        Root<Estudiante> miTablaFrom = mCriteriaQuery.from(Estudiante.class);
+        //3 paso construir las condiciones del SQL
+        //las condiciones se las conoce como predicados 
+        //una condicion es un predicado
+        //e,apellido =: datoApellido
+        Predicate condicionApellido = myBuilder.equal(miTablaFrom.get("apellido"), apellido); // loque vamos a comparar lo que en este caso es el apellido :D
+        //4.- Armamos mi sql final 
+        mCriteriaQuery.select(miTablaFrom).where(condicionApellido); // le mandamos el predicando o la condicion y listo :D
+        TypedQuery<Estudiante> mQuery=this.entityManager.createQuery(mCriteriaQuery);
+
+
+
+
+        return mQuery.getSingleResult();
+    }
+
+    
 
     
     

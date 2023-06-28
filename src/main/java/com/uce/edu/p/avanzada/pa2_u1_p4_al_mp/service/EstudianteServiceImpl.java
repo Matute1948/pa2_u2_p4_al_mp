@@ -60,5 +60,35 @@ public class EstudianteServiceImpl implements EstdianteService{
         return this.estudianteRepository.seleccionarListPorApellidoTyped(apellido);
     }
 
+    @Override
+    public Estudiante buscarPorApellidoNamedQuery(String apellido) {
+        return this.estudianteRepository.seleccionarPorApellidoNamedQuery(apellido);
+    }
+
+    @Override
+    public Estudiante buscarPorApellidoNamed(String apellido) {
+        return this.estudianteRepository.seleccionarPorApellidoNamed(apellido);
+    }
+
+    @Override
+    public Estudiante buscarPorApellidoNativedQuery(String apellido) {
+        return this.estudianteRepository.seleccionarPorApellidoNativeQuery(apellido);
+    }
+
+    @Override
+    public Estudiante buscarPorApellidoNativedQueryNamed(String apellido) {
+        return this.estudianteRepository.seleccionarPorApellidoNativeQueryNamed(apellido);
+    }
+
+    @Override
+    public Estudiante buscarPorNombreNamed(String nombre) {
+        return this.estudianteRepository.seleccionarPorNombreNamed(nombre);
+    }
+
+    @Override
+    public Estudiante buscarPorNombreNativedQueryNamed(String nombre) {
+        return this.estudianteRepository.seleccionarPorNombreNativeQueryNamed(nombre);
+    }
+
     
 }
