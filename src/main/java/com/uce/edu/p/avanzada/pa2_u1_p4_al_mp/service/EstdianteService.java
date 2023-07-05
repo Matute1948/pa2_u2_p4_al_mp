@@ -21,5 +21,8 @@ public interface EstdianteService {
     public Estudiante buscarPorNumero(String cedula);
     public void eliminar(String cedula);
     public void actualizar(Estudiante estudiante);
+    public Estudiante buscarEstudianteDinamico(String nombre, String apellido, Double peso) ;
+    public int eliminarPorNombre(String nombre);
+    public int actualizarPorApellido(String nombre,String apellido);
     
 }

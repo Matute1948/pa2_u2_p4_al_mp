@@ -25,7 +25,7 @@ public class Autor {
     @Column(name = "au_apellido")
     private String apellido;
     //una buena practica es un conjunto en lugar de una list
-    @ManyToMany(mappedBy = "autores")
+    @ManyToMany(mappedBy = "autores",cascade = CascadeType.ALL)
     private Set<Libro> libro;
     // set y get 
 

@@ -13,7 +13,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 @Table(name = "matricula")
-@Entity
+@Entity 
 public class Matricula {
 
     @GeneratedValue(generator = "seq_matricula",strategy = GenerationType.SEQUENCE)

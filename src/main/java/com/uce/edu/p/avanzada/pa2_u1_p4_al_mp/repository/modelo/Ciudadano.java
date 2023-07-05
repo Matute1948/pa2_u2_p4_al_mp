@@ -23,6 +23,7 @@ public class Ciudadano {
     private String apellido;
     @Column(name = "ciud_cedula" )
     private String cedula;
+    
     @OneToOne(mappedBy = "ciudadano", cascade = CascadeType.ALL) // nombre del atributa de la tabla secuandaria
     private Empleado empleado; // solo va a tener un empelado
     // si quisiera mas seria una lista o algo por el estilo

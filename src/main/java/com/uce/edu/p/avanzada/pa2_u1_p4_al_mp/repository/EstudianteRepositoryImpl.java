@@ -143,12 +143,59 @@ public class EstudianteRepositoryImpl implements EstudianteRepository{
         Predicate condicionApellido = myBuilder.equal(miTablaFrom.get("apellido"), apellido); // loque vamos a comparar lo que en este caso es el apellido :D
         //4.- Armamos mi sql final 
         mCriteriaQuery.select(miTablaFrom).where(condicionApellido); // le mandamos el predicando o la condicion y listo :D
+        //La ejecucion del query los ralizamos con typed query
         TypedQuery<Estudiante> mQuery=this.entityManager.createQuery(mCriteriaQuery);
 
-
-
+        return mQuery.getSingleResult();
+    }
+    @Override
+    public Estudiante seleccionarEstudianteDinamico(String nombre, String apellido, Double peso) {
+        CriteriaBuilder myBuilder = this.entityManager.getCriteriaBuilder();
+        CriteriaQuery<Estudiante> mCriteriaQuery = myBuilder.createQuery(Estudiante.class);
+        Root<Estudiante> miTablaFrom = mCriteriaQuery.from(Estudiante.class);
+        //3 paso construir las condiciones del SQL
+        //las condiciones se las conoce como predicados 
+        //una condicion es un predicado
+        // > 100 e.nombre = AND e.apellido =
+        // <= 100 e.nombre = ? OR e.apellido = ?
+        // 
+        Predicate pNombre = myBuilder.equal(miTablaFrom.get("nombre"), nombre);
+        Predicate pApellido = myBuilder.equal(miTablaFrom.get("apellido"), apellido);
+        Predicate pFinal = null;
+        if(peso.compareTo(Double.valueOf(100)) <= 0){
+            pFinal = myBuilder.or(pNombre, pApellido);
+        }else{
+            pFinal = myBuilder.and(pNombre, pApellido);
+        }
+        
+        mCriteriaQuery.select(miTablaFrom).where(pFinal);
+        TypedQuery<Estudiante> mQuery=this.entityManager.createQuery(mCriteriaQuery);
 
         return mQuery.getSingleResult();
+    }
+    @Override
+    public int eliminarPorNombre(String nombre) {
+        //DELETE FROM estudiante where estu_nombre = ?
+        //DELETE FROM Estudiante e WHERE e.nombre = :datoNombre
+        Query mQuery = this.entityManager.createQuery("DELETE FROM Estudiante e WHERE e.nombre = :datoNombre");
+        mQuery.setParameter("datoNombre", nombre);
+        //porque eliminar significa que se actualizo la tabla de datos
+        //retorna el numero de registros afectados 
+        //si hay 5 estudiante con el mismo nombre se borran los 5 XD
+        return mQuery.executeUpdate();
+
+        
+    }
+    @Override
+    public int actualizarPorApellido(String nombre, String apellido) {
+        //SQL
+        //UPDATE estudiante SET estu_nombre = ? WHERE estu_apellido = ?
+        //JPQL
+        //UPDATE Estudiante e SET e.nombre = :datoNombre WHERE e.apellido = :datoApellido
+        Query mQuery = this.entityManager.createQuery("UPDATE Estudiante e SET e.nombre = :datoNombre WHERE e.apellido = :datoApellido");
+        mQuery.setParameter("datoNombre", nombre);
+        mQuery.setParameter("datoApellido", apellido);
+        return mQuery.executeUpdate();
     }
 
     
