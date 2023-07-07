@@ -9,6 +9,7 @@ import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.deberCriteriQuery.repository.model
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -57,5 +58,22 @@ public class VideoJuegoRepositoryImpl implements VideoJuegoRepository{
         TypedQuery<VideoJuego> mQuery=this.entityManager.createQuery(mCriteriaQuery);
         return mQuery.getResultList();
     }
+
+    @Override
+    public int eliminarPorTituloEmpiezanConG(String titulo) {
+        Query mQuery = this.entityManager.createQuery("DELETE FROM VideoJuego e WHERE e.titulo LIKE :datoTitulo");
+        mQuery.setParameter("datoTitulo", titulo+"%");
+        return mQuery.executeUpdate();
+    }
+
+    @Override
+    public int actualizarPorGenero(String genero, String clasificacion) {
+        Query mQuery = this.entityManager.createQuery("UPDATE VideoJuego e SET e.clasificacion = :datoClasificacion WHERE e.genero LIKE :datoGenero");
+        mQuery.setParameter("datoGenero", "%"+genero+"%");
+        mQuery.setParameter("datoClasificacion", clasificacion);
+        return mQuery.executeUpdate();
+    }
+
+    
     
 }

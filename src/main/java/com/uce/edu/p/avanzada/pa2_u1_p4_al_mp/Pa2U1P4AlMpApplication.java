@@ -55,9 +55,12 @@ public class Pa2U1P4AlMpApplication implements CommandLineRunner {
 		this.videoJuegoService.agregar(videoJuego3);
 		this.videoJuegoService.agregar(videoJuego4);
 
-		System.out.println(this.videoJuegoService.buscarPorDesarolladoraCosto("Nintendo", new BigDecimal(0)));
+		//System.out.println(this.videoJuegoService.buscarPorDesarolladoraCosto("Nintendo", new BigDecimal(0)));
+		System.out.println("************************************************************");
+		System.out.println("Se acutalizaron: "+this.videoJuegoService.actualizarPorGeneroQueContengaL("ura", "Para todas las edades"));
 
-
+		System.out.println("Se eliminaron: "+this.videoJuegoService.eliminarPorTituloEmpiezanConG("G"));
+		System.out.println("************************************************************");
 
 
 

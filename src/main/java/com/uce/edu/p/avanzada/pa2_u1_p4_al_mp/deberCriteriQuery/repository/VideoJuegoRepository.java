@@ -12,5 +12,7 @@ public interface VideoJuegoRepository {
     public void eliminar(Integer id);
     public void actualizar(VideoJuego videoJuego);
     public List<VideoJuego> seleccionarPorDesarolladoraCosto(String desarolladora, BigDecimal costo);
+    public int eliminarPorTituloEmpiezanConG(String titulo);
+    public int actualizarPorGenero(String genero, String clasificacion);
 
 }

@@ -39,5 +39,15 @@ public class VideoJuegoServiceImpl implements VideoJuegoService{
     public List<VideoJuego> buscarPorDesarolladoraCosto(String desarolladora, BigDecimal costo) {
         return this.videoJuegoRepository.seleccionarPorDesarolladoraCosto(desarolladora, costo);
     }
+
+    @Override
+    public int eliminarPorTituloEmpiezanConG(String titulo) {
+       return this.videoJuegoRepository.eliminarPorTituloEmpiezanConG(titulo); 
+    }
+
+    @Override
+    public int actualizarPorGeneroQueContengaL(String genero, String clasificacion) {
+        return this.videoJuegoRepository.actualizarPorGenero(genero, clasificacion);
+    }
     
 }

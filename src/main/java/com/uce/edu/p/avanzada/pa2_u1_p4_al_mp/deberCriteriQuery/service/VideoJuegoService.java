@@ -11,4 +11,6 @@ public interface VideoJuegoService {
     public void eliminar(Integer id);
     public void actualizar(VideoJuego videoJuego);
     public List<VideoJuego> buscarPorDesarolladoraCosto(String desarolladora, BigDecimal costo);
+    public int eliminarPorTituloEmpiezanConG(String titulo);
+    public int actualizarPorGeneroQueContengaL(String genero, String clasificacion);
 }
