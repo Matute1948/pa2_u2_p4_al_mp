@@ -1,22 +1,29 @@
 package com.uce.edu.p.avanzada.pa2_u1_p4_al_mp;
 
-
-import java.math.BigDecimal;
-
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.deberCriteriQuery.repository.modelo.VideoJuego;
-import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.deberCriteriQuery.service.VideoJuegoService;
 import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.repository.modelo.Estudiante;
+import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.repository.modelo.Habitacion;
+import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.repository.modelo.Hotel;
+import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.repository.modelo.dto.EstudianteDTO;
+import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.repository.modelo.dto.MatriculaDTO;
 import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.service.EstdianteService;
+import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.service.HotelService;
+import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.service.MatriculaService;
 
 @SpringBootApplication
 public class Pa2U1P4AlMpApplication implements CommandLineRunner {
 	@Autowired
-	private VideoJuegoService videoJuegoService;
+	private EstdianteService estudianteService;
+	@Autowired
+	private MatriculaService matriculaService;
+	@Autowired
+	private HotelService hotelService;
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(Pa2U1P4AlMpApplication.class, args);
@@ -25,48 +32,31 @@ public class Pa2U1P4AlMpApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		VideoJuego videoJuego1 = new VideoJuego();
-		VideoJuego videoJuego2 = new VideoJuego();
-		VideoJuego videoJuego3 = new VideoJuego();
-		VideoJuego videoJuego4 = new VideoJuego();
-
-		videoJuego1.setTitulo("God of war 2018");
-		videoJuego1.setGenero("Aventura");
-		videoJuego1.setDesarolladora("Santa Monica");
-		videoJuego1.setCosto(new BigDecimal(20));
-
-		videoJuego2.setTitulo("Bayonetta");
-		videoJuego2.setGenero("Aventura");
-		videoJuego2.setDesarolladora("Sega");
-		videoJuego2.setCosto(new BigDecimal(40));
-
-		videoJuego3.setTitulo("Zelda BOFTW");
-		videoJuego3.setGenero("Mundo abierto");
-		videoJuego3.setDesarolladora("Nintendo");
-		videoJuego3.setCosto(new BigDecimal(60));
-
-		videoJuego4.setTitulo("Sonic Fronters");
-		videoJuego4.setGenero("Aventura");
-		videoJuego4.setDesarolladora("Sega");
-		videoJuego4.setCosto(new BigDecimal(35));
-
-		this.videoJuegoService.agregar(videoJuego1);
-		this.videoJuegoService.agregar(videoJuego2);
-		this.videoJuegoService.agregar(videoJuego3);
-		this.videoJuegoService.agregar(videoJuego4);
-
-		//System.out.println(this.videoJuegoService.buscarPorDesarolladoraCosto("Nintendo", new BigDecimal(0)));
-		System.out.println("************************************************************");
-		System.out.println("Se acutalizaron: "+this.videoJuegoService.actualizarPorGeneroQueContengaL("ura", "Para todas las edades"));
-
-		System.out.println("Se eliminaron: "+this.videoJuegoService.eliminarPorTituloEmpiezanConG("G"));
-		System.out.println("************************************************************");
-
-
-
-		/* 
 		Estudiante estudiante = new Estudiante();
 		Estudiante estudiante1 = new Estudiante();
+
+		Hotel hot = new Hotel();
+		Habitacion hab1 = new Habitacion();
+		Habitacion hab2 = new Habitacion();
+		Habitacion hab3 = new Habitacion();
+		List<Habitacion> hab = new ArrayList<>();
+		
+
+		hab1.setNumero("102");
+		hab2.setNumero("103");
+		hab3.setNumero("104");
+		hab1.setHotel(hot);
+		hab2.setHotel(hot);
+		hab3.setHotel(hot);
+		hab.add(hab3);
+		hab.add(hab2);
+		hab.add( hab1);
+		hot.setDireccion("Sangolqui");
+		hot.setNombre("Buen dia");
+
+		hot.setHabitacion(hab);
+
+		//this.hotelService.agregar(hot);
 
 		estudiante.setNombre("Andres");
 		estudiante.setApellido("Lugmaña");
@@ -80,15 +70,30 @@ public class Pa2U1P4AlMpApplication implements CommandLineRunner {
 		estudiante1.setInstitucion("Cen");
 		estudiante1.setPeso(Double.valueOf(70));
 
-		this.estdianteService.agregar(estudiante1);
-		this.estdianteService.agregar(estudiante);
+		//this.estudianteService.agregar(estudiante1);
+		//this.estudianteService.agregar(estudiante);
 		
-		this.estdianteService.buscarEstudianteDinamico("Andres", "Lugmaña", Double.valueOf(130));
-		this.estdianteService.buscarEstudianteDinamico("Arelis", "Cacuango", Double.valueOf(80));
-		System.out.println(this.estdianteService.eliminarPorNombre("Andres"));
-		System.out.println(this.estdianteService.actualizarPorApellido("Jhomara", "Cacuango"));
+		//this.estdianteService.buscarEstudianteDinamico("Andres", "Lugmaña", Double.valueOf(130));
+		//this.estdianteService.buscarEstudianteDinamico("Arelis", "Cacuango", Double.valueOf(80));
+		//System.out.println(this.estdianteService.eliminarPorNombre("Andres"));
+		//System.out.println(this.estdianteService.actualizarPorApellido("Jhomara", "Cacuango"));
 
-		*/
+		
+		System.out.println("*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+		List<MatriculaDTO> lis = this.matriculaService.buscarTodoDTO();
+		for (MatriculaDTO matriculaDTO : lis) {
+			System.out.println(matriculaDTO);
+		}
+		System.out.println("*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+		List<EstudianteDTO> esList = this.estudianteService.buscarTodoDTO();
+		for (EstudianteDTO estudianteDTO : esList) {
+			System.out.println(estudianteDTO);
+		}
+		
+		System.out.println("*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+		List<Habitacion> habb = this.hotelService.buscarPorNumero(152).getHabitacion();
+		System.out.println(habb.get(0));
+
 	}
 
 }

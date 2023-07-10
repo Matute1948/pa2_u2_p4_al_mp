@@ -7,6 +7,7 @@ import org.hibernate.annotations.DialectOverride.Where;
 import org.springframework.stereotype.Repository;
 
 import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.repository.modelo.Estudiante;
+import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.repository.modelo.dto.EstudianteDTO;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -197,6 +198,13 @@ public class EstudianteRepositoryImpl implements EstudianteRepository{
         mQuery.setParameter("datoApellido", apellido);
         return mQuery.executeUpdate();
     }
+    @Override
+    public List<EstudianteDTO> seleccionarTodoTDO() {
+        //EstudianteDTO es un tipo de modelo
+        TypedQuery<EstudianteDTO> mQuery = this.entityManager.createQuery("SELECT NEW com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.repository.modelo.dto.EstudianteDTO(e.nombre,e.apellido) FROM Estudiante e ", EstudianteDTO.class);
+        return mQuery.getResultList();
+    }
+    
 
     
 

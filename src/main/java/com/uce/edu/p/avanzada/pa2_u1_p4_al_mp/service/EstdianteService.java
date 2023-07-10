@@ -3,6 +3,7 @@ package com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.service;
 import java.util.List;
 
 import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.repository.modelo.Estudiante;
+import com.uce.edu.p.avanzada.pa2_u1_p4_al_mp.repository.modelo.dto.EstudianteDTO;
 
 public interface EstdianteService {
 
@@ -24,5 +25,5 @@ public interface EstdianteService {
     public Estudiante buscarEstudianteDinamico(String nombre, String apellido, Double peso) ;
     public int eliminarPorNombre(String nombre);
     public int actualizarPorApellido(String nombre,String apellido);
-    
+    public List<EstudianteDTO> buscarTodoDTO();
 }

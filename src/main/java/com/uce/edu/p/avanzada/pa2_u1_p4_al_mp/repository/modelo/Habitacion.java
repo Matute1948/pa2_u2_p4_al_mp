@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -59,7 +60,7 @@ public class Habitacion {
     //toString 
     @Override
     public String toString() {
-        return "Habitacion [id=" + id + ", numero=" + numero + ", valor=" + valor + ", hotel=" + hotel + "]";
+        return "Habitacion [id=" + id + ", numero=" + numero + ", valor=" + valor + "]";
     }
 
     
